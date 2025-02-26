@@ -1,0 +1,117 @@
+POST /api/user/login
+{
+    username: string,
+    password: string
+}
+{
+    success: boolean,
+    message: string,
+    sessionId: string,
+    user: {
+        uid: number,
+        username: string
+    },
+    groups: [
+        {
+            gid: number,
+            groupname: string
+        }
+    ]
+}
+
+POST /api/user/logout
+{
+    sessionId: string
+}
+{
+    success: boolean,
+    message: string
+}
+
+POST /api/device/<deviceId>/sensor/<sensorId>/history
+{
+    sessionId: string
+}
+{
+    success: boolean,
+    message: string,
+    points: [
+        {
+            value: any,
+            timestamp: number
+        }
+    ]
+}
+
+POST /api/device/<deviceId>/command
+{
+    sessionId: string,
+    type: string,
+    args: string[]
+}
+{
+    success: boolean,
+    message: string
+}
+
+WS /api/connection
+Authorization: Basic <sessionId>
+
+{
+    type: "attach",
+    data: {
+        id: number,
+        type: string,
+        properties: {
+            name: string,
+            owner_user: number,
+            owner_group: number,
+            perm_flag: number,
+            ...
+        },
+        sensors: [
+            {
+                id: number,
+                name: string,
+                type: string
+                point: {
+                    value: any,
+                    timestamp: number
+                }
+            }
+        ]
+    }
+}
+
+{
+    type: "detach",
+    data: {
+        id: number,
+    }
+}
+
+{
+    type: "update",
+    data: {
+        id: number,
+        type: string,
+        properties: {
+            name: string,
+            owner_user: number,
+            owner_group: number,
+            perm_flag: number,
+            ...
+        },
+        sensors: [
+            {
+                id: number,
+                name: string,
+                type: string,
+                point: {
+                    value: any,
+                    timestamp: number
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,68 @@
+<- slot
+-> signal
+
+authentication
+    credential
+        username
+        password
+    session
+        sessionId
+        user
+            uid
+            username
+        groups
+            gid
+            groupname
+
+device (lock, lamp, socket, aircon, speaker, ...)
+    info
+        id
+        type
+
+    properties
+        name
+        owner user
+        owner group
+        perm flag
+        status (dynamic?)
+
+    sensors
+        name
+        id
+        type
+
+        point
+            value
+            timestamp
+
+command (poweron, poweroff, ...)
+    type
+    args
+
+apiRepository
+    apiUrl
+    post(endpoint, data) -> reply // caller owned, call deleteLater
+
+accountRepository
+    <- login(credential)
+    <- logout()
+    -> message(msg)
+    -> loggedIn(session)
+    -> loggedOut()
+
+deviceRepository
+    queryHistory(deviceId, sensorId) -> points // caller owned
+    <- connect(session)
+    <- disconnect()
+    <- send(deviceInfo, command)
+    -> message(msg)
+    -> attached(deviceMonitor) // callee owned
+    -> detached(deviceId)
+
+deviceMonitor
+    <- update(deviceProperties) // forward update signal from upstream
+    -> updated(deviceProperties)
+
+sensorMonitor
+    <- update(point) // forward update signal from upstream
+    -> updated(point)

@@ -1,0 +1,29 @@
+{
+    type: "chown",
+    args: ["<uid>", "<gid>"]
+}
+
+{
+    type: "chmod",
+    args: ["644"]
+}
+
+{
+    type: "poweron",
+    args: []
+}
+
+{
+    type: "poweroff",
+    args: []
+}
+
+{
+    type: "set",
+    args: [
+        "name",
+        "value"
+    ]
+}
+
+...
