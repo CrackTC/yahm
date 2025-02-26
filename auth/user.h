@@ -8,7 +8,7 @@ class User
 public:
     User(const int uid, const QString &username);
     const int uid;
-    const QString &username;
+    const QString username;
 };
 
 #endif // USER_H

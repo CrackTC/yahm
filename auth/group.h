@@ -8,7 +8,7 @@ class Group
 public:
     Group(const int gid, const QString &groupname);
     const int gid;
-    const QString &groupname;
+    const QString groupname;
 };
 
 #endif // GROUP_H

@@ -67,7 +67,9 @@ Authorization: Basic <sessionId>
             owner_user: number,
             owner_group: number,
             perm_flag: number,
-            ...
+            extraProps: {
+                ...
+            }
         },
         sensors: [
             {
@@ -92,26 +94,30 @@ Authorization: Basic <sessionId>
 
 {
     type: "update",
-    data: {
-        id: number,
-        type: string,
-        properties: {
-            name: string,
-            owner_user: number,
-            owner_group: number,
-            perm_flag: number,
-            ...
-        },
-        sensors: [
-            {
-                id: number,
+    data: [
+        {
+            id: number,
+            type: string,
+            properties: {
                 name: string,
-                type: string,
-                point: {
-                    value: any,
-                    timestamp: number
+                owner_user: number,
+                owner_group: number,
+                perm_flag: number,
+                extraProps: {
+                    ...
                 }
-            }
-        ]
-    }
+            },
+            sensors: [
+                {
+                    id: number,
+                    name: string,
+                    type: string,
+                    point: {
+                        value: any,
+                        timestamp: number
+                    }
+                }
+            ]
+        }
+    ]
 }

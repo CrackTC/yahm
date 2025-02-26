@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>drawables/aircon.png</file>
+        <file>drawables/temp.png</file>
+        <file>drawables/adjust.png</file>
+        <file>drawables/flake.png</file>
+        <file>drawables/sun.png</file>
+    </qresource>
+</RCC>

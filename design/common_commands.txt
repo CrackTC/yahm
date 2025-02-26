@@ -9,20 +9,10 @@
 }
 
 {
-    type: "poweron",
-    args: []
-}
-
-{
-    type: "poweroff",
-    args: []
-}
-
-{
     type: "set",
     args: [
-        "name",
-        "value"
+        "name", // e.g. tgtTemperature for airconditioner
+        "value" // e.g. "28"
     ]
 }
 

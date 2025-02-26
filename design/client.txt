@@ -51,10 +51,11 @@ accountRepository
     -> loggedOut()
 
 deviceRepository
-    queryHistory(deviceId, sensorId) -> points // caller owned
+    queryHistory(deviceId, sensorId) -> tag
     <- connect(session)
     <- disconnect()
     <- send(deviceInfo, command)
+    -> historyRecved(tag, points)
     -> message(msg)
     -> attached(deviceMonitor) // callee owned
     -> detached(deviceId)
