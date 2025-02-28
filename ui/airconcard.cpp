@@ -33,7 +33,7 @@ void AirconCard::updateUi()
     ui->lblTgtTemp->setText(QString::number(model.tgtTemp) + "°C");
     ui->btnPower->setText(model.power ? "Running" : "Stopped");
     ui->lblMode->setPixmap(model.mode == "cool" ? flake : sun);
-    ui->lblTemp->setText(model.temp);
+    ui->lblTemp->setText(QString::number(model.temp) + "°C");
 }
 
 void AirconCard::onDataUpdate(const DeviceData *data)

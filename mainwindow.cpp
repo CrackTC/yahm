@@ -4,6 +4,7 @@
 #include "di/mainmodule.h"
 #include "mainwindow.h"
 #include "ui/airconcard.h"
+#include "ui/socketcard.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -16,9 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
     lblUser.setMinimumWidth(100);
     lblGroup.setMinimumWidth(100);
 
-    connect(ui->actionExit, &QAction::triggered, [=] { this->close(); });
+    connect(ui->actionExit, &QAction::triggered, this, [=] { this->close(); });
     connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::logout);
-    connect(ui->actionAbout, &QAction::triggered, [=] {
+    connect(ui->actionAbout, &QAction::triggered, this, [=] {
         QMessageBox::about(this, "About", "Yet Another Home Monitor v0.1.0");
     });
 
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             &MainWindow::removeDevice);
     connect(mainModule->deviceRepository(), &DeviceRepository::message, this, &MainWindow::message);
-    connect(mainModule->accountRepository(), &AccountRepository::loggedIn, [&] {
+    connect(mainModule->accountRepository(), &AccountRepository::loggedIn, this, [&] {
         auto session = mainModule->accountRepository()->session();
         lblUser.setText(
             QString("User: %1(%2)").arg(session->user->username).arg(session->user->uid));
@@ -48,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    for (auto card : cards) {
+    for (auto card : std::as_const(cards)) {
         card->deleteLater();
     }
 }
@@ -62,6 +63,8 @@ void MainWindow::addDevice(const DeviceMonitor &device)
 
     if (info->type() == "air_conditioner") {
         card = new AirconCard(device.data());
+    } else if (info->type() == "socket") {
+        card = new SocketCard(device.data());
     } else {
         qDebug() << "unknown device type";
     }
@@ -94,7 +97,7 @@ void MainWindow::message(const QString &msg)
 
 void MainWindow::clear()
 {
-    for (auto card : cards) {
+    for (auto card : std::as_const(cards)) {
         card->deleteLater();
     }
     cards.clear();

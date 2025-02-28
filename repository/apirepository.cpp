@@ -11,11 +11,11 @@ ApiRepository::ApiRepository(const QString &apiUrl, QObject *parent)
 QNetworkReply *ApiRepository::post(const QString &endpoint, const QJsonDocument &data)
 {
     if (m_netManager == nullptr) {
-        QNetworkProxyFactory::setUseSystemConfiguration(true);
-        auto proxies = QNetworkProxyFactory::systemProxyForQuery();
+        //QNetworkProxyFactory::setUseSystemConfiguration(true);
+        //auto proxies = QNetworkProxyFactory::systemProxyForQuery();
 
         m_netManager = new QNetworkAccessManager(this);
-        m_netManager->setProxy(proxies[0]);
+        //m_netManager->setProxy(proxies[0]);
     }
 
     auto url = QUrl("http://" + m_apiUrl + endpoint);

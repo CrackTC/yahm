@@ -8,9 +8,9 @@ AirconModel::AirconModel(const DeviceData *data)
 {
     for (auto sensor : data->sensors()) {
         if (sensor->name() == "Temperature") {
-            temp = sensor->point().value.toString() + "°C";
+            temp = sensor->point().value.toReal();
         } else if (sensor->name() == "Humidity") {
-            humidity = sensor->point().value.toString() + "%";
+            humidity = sensor->point().value.toReal();
         }
     }
 }

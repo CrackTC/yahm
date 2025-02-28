@@ -21,6 +21,7 @@ SOURCES += \
     device/deviceproperties.cpp \
     device/sensormonitor.cpp \
     devicemodel/airconmodel.cpp \
+    devicemodel/socketmodel.cpp \
     di/mainmodule.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -31,7 +32,9 @@ SOURCES += \
     ui/airconcard.cpp \
     ui/airconpage.cpp \
     ui/devicecard.cpp \
-    ui/loginwindow.cpp
+    ui/loginwindow.cpp \
+    ui/socketcard.cpp \
+    ui/socketpage.cpp
 
 HEADERS += \
     auth/credential.h \
@@ -46,6 +49,7 @@ HEADERS += \
     device/deviceproperties.h \
     device/sensormonitor.h \
     devicemodel/airconmodel.h \
+    devicemodel/socketmodel.h \
     di/mainmodule.h \
     mainwindow.h \
     net/websocketclient.h \
@@ -55,13 +59,17 @@ HEADERS += \
     ui/airconcard.h \
     ui/airconpage.h \
     ui/devicecard.h \
-    ui/loginwindow.h
+    ui/loginwindow.h \
+    ui/socketcard.h \
+    ui/socketpage.h
 
 FORMS += \
     mainwindow.ui \
     ui/airconcard.ui \
     ui/airconpage.ui \
-    ui/loginwindow.ui
+    ui/loginwindow.ui \
+    ui/socketcard.ui \
+    ui/socketpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -70,3 +78,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ui/drawables.qrc
+
+DISTFILES +=

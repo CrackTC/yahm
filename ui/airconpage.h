@@ -2,6 +2,7 @@
 #define AIRCONPAGE_H
 
 #include <QWidget>
+#include <QChartView>
 
 #include "devicemodel/airconmodel.h"
 
@@ -25,6 +26,8 @@ private:
     int id;
     AirconModel model;
     void updateUi();
+    QChartView tempView;
+    QChartView humidityView;
 };
 
 #endif // AIRCONPAGE_H

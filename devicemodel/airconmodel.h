@@ -21,9 +21,9 @@ public:
     AirconModel(const AirconModel &other) { *this = other; }
 
     QString name;
-    QString temp;
+    qreal temp;
     int tgtTemp;
-    QString humidity;
+    qreal humidity;
     bool power;
     QString mode;
 
